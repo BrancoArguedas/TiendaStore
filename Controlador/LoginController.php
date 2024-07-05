@@ -16,13 +16,12 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
         $user = $usuarioModel->findUserByEmail($email);
 
         $clienteModel = new Cliente();
-        $cliente = $clienteModel->getClientesByEmail($email);
-    
-        $_SESSION['cliente_id'] = $cliente['id'];
+        $cliente = $clienteModel->getClienteByEmail($email);
+        $_SESSION['cliente_id'] = $cliente['cliente_id'];
         $_SESSION['usuario_id'] = $user['id'];
         $_SESSION['email'] = $user['email'];
         $_SESSION['rol'] = $user['rol'];
-
+        
         if ($user['rol'] == "admin") {
             header("Location: ../Vista/Dashboard.php");
             exit(); 
@@ -37,6 +36,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
         header("Location: ../Vista/Login.php?error=2");
         exit();
     }
+        
 } else {
     header("Location: ../Vista/Index.php");
     exit();

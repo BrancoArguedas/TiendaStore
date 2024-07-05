@@ -46,14 +46,14 @@ class Cliente {
         }
     }
 
-    public function getClientesByEmail($email){
-        $clientes = [];
+    public function getClienteByEmail($email){
+        $cliente = null;
         try {
-            $consulta = $this->conn->prepare("SELECT c.*, u.* FROM clientes c INNER JOIN usuarios u ON u.id = c.usuario_id where u.email = :email");
+            $consulta = $this->conn->prepare("SELECT c.id as cliente_id, c.nombre, c.apellidoPaterno, c.apellidoMaterno, c.fechaNacimiento, c.sexo, c.departamento, c.provincia, c.distrito, c.direccion, u.id as usuario_id, u.email, u.password, u.rol  FROM clientes c INNER JOIN usuarios u ON u.id = c.usuario_id where u.email = :email");
             $consulta->bindParam(':email', $email);
             $consulta->execute();
-            $clientes = $consulta->fetchAll(PDO::FETCH_ASSOC);
-            return $clientes;
+            $cliente = $consulta->fetch(PDO::FETCH_ASSOC);
+            return $cliente;
         } catch (PDOException $e) {
             echo "Error de la consulta: " . $e->getMessage();
             return false;
