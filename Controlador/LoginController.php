@@ -26,7 +26,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
             header("Location: ../Vista/Dashboard.php");
             exit(); 
         } elseif ($user['rol'] == "cliente") {
-            header("Location: ../Vista/Productos.php");
+            header("Location: ../Vista/Index.php");
             exit();
         } else {
             header("Location: ../Vista/Login.php?error=1");

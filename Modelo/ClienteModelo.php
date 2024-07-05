@@ -11,7 +11,7 @@ class Cliente {
         $this->conn = $db->getConnection();
     }
 
-    public function create($usuario_id, $nombre, $apellidoPaterno, $apellidoMaterno, $fechaNacimiento, $sexo, $departamento, $provincia, $distrito, $direccion){
+    public function crearCliente($usuario_id, $nombre, $apellidoPaterno, $apellidoMaterno, $fechaNacimiento, $sexo, $departamento, $provincia, $distrito, $direccion){
         try{
             $consulta = $this->conn->prepare("INSERT INTO clientes (usuario_id, nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, sexo, departamento, provincia, distrito, direccion) VALUES (:usuario_id, :nombre, :apellidoPaterno, :apellidoMaterno, :fechaNacimiento, :sexo, :departamento, :provincia, :distrito, :direccion)");
             $consulta->bindParam(':usuario_id', $usuario_id);
@@ -33,7 +33,7 @@ class Cliente {
         }
     }
 
-    public function getAllClientes() {
+    public function getAllProductos() {
         $clientes = [];
         try {
             $consulta = $this->conn->prepare("SELECT c.*, u.* FROM clientes c INNER JOIN usuarios u ON u.id = c.usuario_id");
@@ -59,6 +59,7 @@ class Cliente {
             return false;
         }
     }
+
 }
 
 ?>

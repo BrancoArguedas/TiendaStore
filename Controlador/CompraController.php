@@ -16,7 +16,8 @@ if($_POST){
         $productoControlador = new ProductoControlador();
         $actualizarStock = $productoControlador->actualStock($producto_id, $cantidad);
         if($actualizarStock){
-            var_dump($actualizarStock);
+            header("Location: ../Vista/compraExitosa.php?id=" . $producto_id);
+            exit;
         }else{
             echo "error al actualizar stock";
         }
