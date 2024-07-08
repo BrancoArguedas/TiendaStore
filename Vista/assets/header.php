@@ -1,9 +1,10 @@
 <header class="bg-red-400 flex items-center justify-between min-h-16 px-4 fixed w-full top-0 lg:px-16">
 
-    <div class="flex gap-2 items-center">
+    <a href="./Index.php" class="flex gap-2 items-center">
         <img src="./public/logo.jpeg" class="w-12" alt="Logo">
         <h2>Tienda</h2>
-    </div>
+    </a>
+    
     <div id="iconoMenu" class="flex flex-col gap-1 md:hidden" onclick="mostrarNav()">
         <div class="h-1 w-8 rounded-xl bg-red-700"></div>
         <div class="h-1 w-8 rounded-xl bg-red-700"></div>

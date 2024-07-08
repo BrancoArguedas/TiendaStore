@@ -3,12 +3,13 @@ session_start();
 
 require_once '../Controlador/ProductoController.php';
 
-$productoController = new ProductoControlador(); // Asegúrate de que este es el nombre correcto de la clase
+$productoController = new ProductoControlador(); 
 
 if (isset($_GET['id'])) {
     $producto_id = intval($_GET['id']); 
     $producto = $productoController->getProductoById($producto_id);
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -23,12 +24,12 @@ if (isset($_GET['id'])) {
 
 <body>
     <?php include 'assets/header.php'; ?>
-    <main class="flex w-full mt-10 items-center">
-        <div class="w-1/2">
-            <img src="public/img-products/<?= htmlspecialchars($producto['imagen'])?>" alt="Foto-producto">
+    <main class="flex w-full h-[calc(100vh-4rem)] mt-16 items-center">
+        <div class="w-1/2 flex justify-center object-cover">
+            <img class="w-96" src="public/img-products/<?= htmlspecialchars($producto['imagen'])?>" alt="Foto-producto">
         </div>
         <div class="w-1/2 flex flex-col justify-center gap-8">
-            <h2 class="text-3xl text-center"><?php echo htmlspecialchars($producto['descripcion']); ?></h2>
+            <h2 class="text-3xl text-center"><?= htmlspecialchars($producto['descripcion']); ?></h2>
             <form class="w-1/2 grid grid-cols-2 gap-y-8" action="../Controlador/CompraController.php" method="post">
                 <input type="hidden" value="<?= htmlspecialchars($producto_id) ?>" name="producto_id">
                 <label>Categoría:</label>

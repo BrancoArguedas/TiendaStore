@@ -8,6 +8,9 @@
 </head>
 <body class="bg-gradient-to-r from-pink-500 to-violet-500 flex items-center justify-center h-screen">
     <div class="bg-white flex flex-col items-center justify-center rounded-3xl text-xl gap-8 py-8 px-8">
+        <a href="./Index.php" class="flex items-center">
+            <img src="./public/logo.jpeg" class="w-12" alt="Logo">
+        </a>
         <h2 class="text-3xl font-medium">Iniciar sesión</h2>
         <form action="../Controlador/LoginController.php" method="post" class="flex flex-col gap-8">
             <input class="bg-slate-300 px-4 py-2 rounded-xl" type="email" name="email" placeholder="Correo electrónico" required>

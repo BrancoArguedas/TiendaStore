@@ -8,13 +8,13 @@ session_start();
 if (isset($_GET)) {
     $producto_id = $_GET['id'];
 }
-if (isset($_SESSION)) {
+if (isset($_SESSION['email'])) {
     $email = $_SESSION['email'];
-}
-$clienteController = new ClienteControlador();
-$cliente = $clienteController->obtenerClienteByEmail($email);
-$productoController = new ProductoControlador();
-$producto = $productoController->getProductoById($producto_id);
+
+    $clienteController = new ClienteControlador();
+    $cliente = $clienteController->obtenerClienteByEmail($email);
+    $productoController = new ProductoControlador();
+    $producto = $productoController->getProductoById($producto_id);
 
 ?>
 <script src="https://cdn.tailwindcss.com"></script>
@@ -41,3 +41,7 @@ $producto = $productoController->getProductoById($producto_id);
 
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+<?php }else{
+    header("Location: Login.php");
+}

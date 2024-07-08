@@ -16,7 +16,7 @@ session_start();
     <?php
     include 'assets/header.php';
     ?>
-    <div class="w-full h-[calc(100vh-4rem)] flex flex-col items-center gap-4 mb-4 lg:mb-0">
+    <div class="w-full h-[calc(100vh-4rem)] mt-16 flex flex-col items-center gap-4 mb-4 lg:mb-0">
         <img class="h-96 w-full bg-cover" src="public/banner-index.jpeg" alt="Banner-index">
         <h1 class="text-center font-bold text-xl">¿Quiénes somos?</h1>
         <p class="w-2/3">En JaritaStore, creemos que la moda es más que ropa; es una forma de expresión personal. Fundada en 2024, nuestra tienda nació de una pasión por crear piezas únicas que combinen estilo y sostenibilidad.</p>
