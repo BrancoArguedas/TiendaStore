@@ -23,14 +23,13 @@ if (isset($_SESSION['usuario_id']) && ($_SESSION['rol'] == 'admin')) {
     <body>
         <?php include './assets/header.php'; ?>
 
-        <main class=" flex items-start relative">
-            <div id="contenido" class="flex">
+        <main class="h-[calc(100vh-4rem)] flex items-center justify-center relative mt-16">
+            <div id="contenido" class="flex items-center gap-16">
                 <?php include './assets/menuDashboard.php'; ?>
-                <div id="contenedor" class=" h-96 rounded-base">
-                    <div class="bg-black text-white w-full flex justify-around">
-                        <h2 class="">Productos</h2>
-                        <p class="cursor-pointer" onclick="mostrarModal('añadirProducto')">Agregar producto</p>
-                    </div>
+                <div id="contenedor" class=" rounded-base">
+                    <h2 class="py-8 text-center text-xl font-bold">Productos</h2>
+                    <buttom class="cursor-pointer px-4 py-2 border-solid border-black border-2 rounded-xl" onclick="mostrarModal('añadirProducto')">Agregar producto</buttom>
+                    
                     <table class="">
                         <thead>
                             <tr>
@@ -76,10 +75,8 @@ if (isset($_SESSION['usuario_id']) && ($_SESSION['rol'] == 'admin')) {
             const modalAñadirProducto = document.getElementById('añadirProducto');
             const modalEditarProducto = document.getElementById('editarProducto');
             const modalEliminarProducto = document.getElementById('eliminarProducto');
-            const contenido = document.getElementById('contenido');
 
             function mostrarModal(id){
-                contenido.classList.add("blur");
 
                 switch (id){
                     case 'añadirProducto':

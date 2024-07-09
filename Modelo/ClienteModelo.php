@@ -60,6 +60,20 @@ class Cliente {
         }
     }
 
+    public function getClienteById($id){
+        $cliente = null;
+        try {
+            $consulta = $this->conn->prepare("SELECT c.id as cliente_id, c.nombre, c.apellidoPaterno, c.apellidoMaterno, c.fechaNacimiento, c.sexo, c.departamento, c.provincia, c.distrito, c.direccion, u.id as usuario_id, u.email, u.password, u.rol  FROM clientes c INNER JOIN usuarios u ON u.id = c.usuario_id where c.id = :id");
+            $consulta->bindParam(':id', $id);
+            $consulta->execute();
+            $cliente = $consulta->fetch(PDO::FETCH_ASSOC);
+            return $cliente;
+        } catch (PDOException $e) {
+            echo "Error de la consulta: " . $e->getMessage();
+            return false;
+        }
+    }
+
 }
 
 ?>

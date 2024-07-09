@@ -11,12 +11,21 @@ class UsuarioController
         $this->usuarioModel = new Usuario();
     }
 
+    public function getUsuarioByEmail($email){
+        return $this->usuarioModel->findUserByEmail($email);
+    }
+
+    public function getUsuarioById($id){
+        return $this->usuarioModel->findUserById($id);
+    }
+
     public function crearUsuario()
     {
         if ($_POST) {
             $email = $_POST['email'];
             $password = $_POST['password'];
-            $user = $this->usuarioModel->create($email, $password);
+            $rol = "cliente";
+            $user = $this->usuarioModel->create($email, $password, $rol);
             if ($user) {
                 session_start();
                 $_SESSION['id'] = $user['id'];

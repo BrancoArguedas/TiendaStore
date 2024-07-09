@@ -17,21 +17,23 @@
         <li class="py-2 text-center">
             <a href="Nosotros.php">Nosotros</a>
         </li>
-        <?php if ($_SESSION) { ?>
+        <?php if ($_SESSION) : ?>
+            
             <li class="py-2 text-center">
-                <a href="Login.php">Perfil</a>
+                <a href="<?php echo ($_SESSION['rol'] == "admin") ? 'Dashboard.php' : 'miPerfil.php'; ?>">Perfil</a>
             </li>
+
             <li class="py-2 text-center">
                 <a href="./assets/cerrarSesion.php">Cerrar sesión</a>
             </li>
-        <?php } else { ?>
+        <?php else:  ?>
             <li class="py-2 text-center">
                 <a href="Login.php">Iniciar sesión</a>
             </li>
             <li class="py-2 text-center">
                 <a href="Registro.php">Registrarse</a>
             </li>
-        <?php } ?>
+        <?php endif; ?>
     </ul>
 </header>
 

@@ -8,7 +8,7 @@ $productoControlador = new ProductoControlador();
 ?>
 
 
-<div id="editarProducto" class="w-full h-full items-center justify-center absolute <?php echo (isset($_GET['id']) && $_GET['action'] == "editar") ? 'flex' : 'hidden'; ?>">
+<div id="editarProducto" class="w-full h-[calc(100vh-4rem)] mt-16 items-center justify-center absolute <?php echo (isset($_GET['id']) && $_GET['action'] == "editar") ? 'flex' : 'hidden'; ?> backdrop-blur-3xl ">
     <div class="border-solid border-black border-2 h-auto flex flex-col rounded-xl">
         <a href="Dashboard.php" class="text-white w-8 self-end text-center bg-red-500 rounded-tr-xl">x</a>
         <h2 class="text-center py-4">Editar un producto</h2>

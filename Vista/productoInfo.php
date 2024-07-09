@@ -26,7 +26,7 @@ if (isset($_GET['id'])) {
     <?php include 'assets/header.php'; ?>
     <main class="flex w-full h-[calc(100vh-4rem)] mt-16 items-center">
         <div class="w-1/2 flex justify-center object-cover">
-            <img class="w-96" src="public/img-products/<?= htmlspecialchars($producto['imagen'])?>" alt="Foto-producto">
+            <img class="w-96 shadow-lg" src="public/img-products/<?= htmlspecialchars($producto['imagen'])?>" alt="Foto-producto">
         </div>
         <div class="w-1/2 flex flex-col justify-center gap-8">
             <h2 class="text-3xl text-center"><?= htmlspecialchars($producto['descripcion']); ?></h2>
@@ -43,7 +43,12 @@ if (isset($_GET['id'])) {
 
                 <label>Subtotal:</label>
                 <input type="text" id="subtotal" name="subTotal" placeholder="<?= htmlspecialchars($producto['precio']) ?>" value="<?= htmlspecialchars($producto['precio']) ?>" readonly>
-                <button type="submit" class="py-2 col-span-2 self-center bg-[#FDE68A] rounded-xl">COMPRAR</button>
+                <?php if( $producto['stock'] <= 0): ?>
+                    <p class="py-2 col-span-2 self-center bg-[#FDE68A] rounded-xl text-center cursor-pointer">Agotado :c</p>
+                <?php else: ?>
+                    <button type="submit" class="py-2 col-span-2 self-center bg-[#FDE68A] rounded-xl">COMPRAR</button>
+                <?php endif; ?>
+
             </form>
         </div>
     </main>

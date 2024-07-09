@@ -75,6 +75,25 @@ class Usuario
         }
     }
 
+    public function findUserById($id){
+
+        try {
+            $stmt = $this->conn->prepare('SELECT * FROM usuarios WHERE id = ?');
+            $stmt->execute([$id]);
+            $user = $stmt->fetch();
+
+            // Verifica si se encontró un usuario
+            if ($user === false) {
+                return null; // No se encontró ningún usuario con ese correo
+            }
+
+            return $user; // Devuelve el usuario encontrado
+        } catch (PDOException $e) {
+            echo "Error de la consulta: " . $e->getMessage();
+            return null; // Manejo del error: devuelve null en caso de error
+        }
+    }
+
     public function readUsuarios()
     {
         $usuarios = [];

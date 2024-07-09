@@ -35,6 +35,10 @@ class ClienteControlador{
         return $this->clienteModel->getClienteByEmail($email);
     }
 
+    public function obtenerClienteById($email){
+        return $this->clienteModel->getClienteById($email);
+    }
+
 }
 
 ?>

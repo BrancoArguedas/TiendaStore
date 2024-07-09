@@ -1,4 +1,4 @@
-<div id="añadirProducto" class="w-full h-screen hidden items-center justify-center absolute">
+<div id="añadirProducto" class="w-full h-[calc(100vh-4rem)] mt-16 hidden items-center justify-center absolute backdrop-blur-3xl">
     <div class="border-solid border-black border-2 h-auto flex flex-col rounded-xl">
         <a href="Dashboard.php" class="text-white w-8 self-end text-center bg-red-500 rounded-tr-xl">x</a>
         <h2 class="text-center py-4">Agregar un producto</h2>
