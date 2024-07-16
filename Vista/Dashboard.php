@@ -5,7 +5,7 @@ require_once '../Controlador/ProductoController.php';
 
 $productoController = new ProductoControlador();
 
-$productos = $productoController->read();
+$productos = $productoController->leerProductos();
 
 if (isset($_SESSION['usuario_id']) && ($_SESSION['rol'] == 'admin')) {
 
@@ -23,76 +23,35 @@ if (isset($_SESSION['usuario_id']) && ($_SESSION['rol'] == 'admin')) {
     <body>
         <?php include './assets/header.php'; ?>
 
-        <main class="h-[calc(100vh-4rem)] flex items-center justify-center relative mt-16">
-            <div id="contenido" class="flex items-center gap-16">
-                <?php include './assets/menuDashboard.php'; ?>
-                <div id="contenedor" class=" rounded-base">
-                    <h2 class="py-8 text-center text-xl font-bold">Productos</h2>
-                    <buttom class="cursor-pointer px-4 py-2 border-solid border-black border-2 rounded-xl" onclick="mostrarModal('añadirProducto')">Agregar producto</buttom>
-                    
-                    <table class="">
-                        <thead>
-                            <tr>
-                                <th class="px-8 py-4">Descripcion</th>
-                                <th class="px-8 py-4">Categoria</th>
-                                <th class="px-8 py-4">Precio</th>
-                                <th class="px-8 py-4">Stock</th>
-                                <th class="px-8 py-4">Imagen</th>
-                                <th class="px-8 py-4"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php if ($productos) : ?>
-                                <?php foreach ($productos as $producto) : ?>
-                                    <tr class="text-center">
-                                        <td class="py-4"><?= $producto['descripcion'] ?></td>
-                                        <td class="py-4"><?= $producto['categoria'] ?></td>
-                                        <td class="py-4"><?= $producto['precio'] ?></td>
-                                        <td class="py-4"><?= $producto['stock'] ?></td>
-                                        <td class="py-4" ><img  src="./public/img-products/<?= $producto['imagen'] ?>" alt="Producto" class="w-8 mx-auto"></td>
-                                        <td class="py-4"><a href="Dashboard.php?action=editar&id=<?php echo $producto['id']; ?>" onclick="mostrarModal('editarProducto')"><ion-icon class="text-green-500 font-bold" name="create-outline"></ion-icon></a></td>
-                                        <td class="py-4"><a href="Dashboard.php?action=eliminar&id=<?php echo $producto['id']; ?>" onclick="mostrarModal('eliminarProducto')"><ion-icon class="text-red-800" name="trash-outline"></ion-icon></a></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            <?php else : ?>
-                                <tr>
-                                    <td>No hay productos registrados</td>
-                                </tr>
-                            <?php endif; ?>
-                        </tbody>
-                    </table>
-                </div>
+        <main class="h-[calc(100vh-4rem)] flex items-center relative mt-16 gap-16 mx-20">
+            <?php include './assets/menuDashboard.php'; ?>
+            <div id="contenido" class="flex items-center justify-center border-solid border-black border-[1px] flex-1">
+                <?php include './assets/listaClientes.php'; ?>
+                <?php include './assets/listaProductos.php'; ?>
+                <?php include './assets/listaCategorias.php'; ?>
             </div>
-            <?php include './assets/añadirProductos.php'; ?>
-            <?php include './assets/editarProductos.php'; ?>
-            <?php include './assets/eliminarProductos.php'; ?>
         </main>
-
 
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         <script>
-            const modalAñadirProducto = document.getElementById('añadirProducto');
-            const modalEditarProducto = document.getElementById('editarProducto');
-            const modalEliminarProducto = document.getElementById('eliminarProducto');
+            function toggleDiv(divId) {
+                var div = document.getElementById(divId);
+                var divs = document.querySelectorAll('.toggleDiv');
 
-            function mostrarModal(id){
+                divs.forEach(function(el) {
+                    if (el === div) {
+                        el.style.display = 'block';
+                    } else {
+                        el.style.display = 'none';
+                    }
+                });
+            }
 
-                switch (id){
-                    case 'añadirProducto':
-                        modalAñadirProducto.classList.remove("hidden");
-                        modalAñadirProducto.classList.add("flex");
-                        break;
-                    case 'editarProducto':
-                        modalEditarProducto.classList.remove("hidden");
-                        modalEditarProducto.classList.add("flex");
-                        break;
-                    case 'eliminarProducto':
-                        modalEliminarProducto.classList.remove("hidden");
-                        modalEliminarProducto.classList.add("flex");
-                        break;
-                }
-                
+            function closeModal(id) {
+                const modal = document.getElementById(id);
+                modal.classList.remove('block');
+                modal.classList.add('hidden');
             }
         </script>
     </body>

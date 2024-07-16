@@ -1,29 +1,26 @@
 <?php
 
 require_once 'UsuarioModelo.php';
+require_once '../Controlador/Conexion.php';
 
 class Cliente {
     private $conn;
 
-    public function __construct()
-    {
+    public function __construct(){
         $db = new Conexion;
         $this->conn = $db->getConnection();
     }
 
-    public function crearCliente($usuario_id, $nombre, $apellidoPaterno, $apellidoMaterno, $fechaNacimiento, $sexo, $departamento, $provincia, $distrito, $direccion){
+    public function create($usuario_id, $nombre, $apodo, $direccion, $ciudad, $codPostal, $pais){
         try{
-            $consulta = $this->conn->prepare("INSERT INTO clientes (usuario_id, nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, sexo, departamento, provincia, distrito, direccion) VALUES (:usuario_id, :nombre, :apellidoPaterno, :apellidoMaterno, :fechaNacimiento, :sexo, :departamento, :provincia, :distrito, :direccion)");
+            $consulta = $this->conn->prepare("INSERT INTO clientes (usuario_id, nombre, apodo, direccion, ciudad, codPostal, pais) VALUES (:usuario_id, :nombre, :apodo, :direccion, :ciudad, :codPostal, :pais)");
             $consulta->bindParam(':usuario_id', $usuario_id);
             $consulta->bindParam(':nombre', $nombre);
-            $consulta->bindParam(':apellidoPaterno', $apellidoPaterno);
-            $consulta->bindParam(':apellidoMaterno', $apellidoMaterno);
-            $consulta->bindParam(':fechaNacimiento', $fechaNacimiento);
-            $consulta->bindParam(':sexo', $sexo);
-            $consulta->bindParam(':departamento', $departamento);
-            $consulta->bindParam(':provincia', $provincia);
-            $consulta->bindParam(':distrito', $distrito);
+            $consulta->bindParam(':apodo', $apodo);
             $consulta->bindParam(':direccion', $direccion);
+            $consulta->bindParam(':ciudad', $ciudad);
+            $consulta->bindParam(':codPostal', $codPostal);
+            $consulta->bindParam(':pais', $pais);
 
             $consulta->execute();
             return true;
@@ -33,10 +30,10 @@ class Cliente {
         }
     }
 
-    public function getAllProductos() {
+    public function read() {
         $clientes = [];
         try {
-            $consulta = $this->conn->prepare("SELECT c.*, u.* FROM clientes c INNER JOIN usuarios u ON u.id = c.usuario_id");
+            $consulta = $this->conn->prepare("SELECT * FROM clientes");
             $consulta->execute();
             $clientes = $consulta->fetchAll(PDO::FETCH_ASSOC);
             return $clientes;
@@ -46,25 +43,41 @@ class Cliente {
         }
     }
 
-    public function getClienteByEmail($email){
-        $cliente = null;
-        try {
-            $consulta = $this->conn->prepare("SELECT c.id as cliente_id, c.nombre, c.apellidoPaterno, c.apellidoMaterno, c.fechaNacimiento, c.sexo, c.departamento, c.provincia, c.distrito, c.direccion, u.id as usuario_id, u.email, u.password, u.rol  FROM clientes c INNER JOIN usuarios u ON u.id = c.usuario_id where u.email = :email");
-            $consulta->bindParam(':email', $email);
-            $consulta->execute();
-            $cliente = $consulta->fetch(PDO::FETCH_ASSOC);
-            return $cliente;
-        } catch (PDOException $e) {
-            echo "Error de la consulta: " . $e->getMessage();
+    public function update($id, $nombre, $apodo, $direccion, $ciudad, $codPostal, $pais){
+        try{
+            $stmt = $this->conn->prepare("Update clientes set nombre = :nombre, apodo = :apodo, direccion = :direccion, ciudad = :ciudad, codPostal = :codPostal, pais = :pais where id = :id");
+            $stmt->bindParam(':nombre', $nombre);
+            $stmt->bindParam(':apodo', $apodo);
+            $stmt->bindParam(':direccion', $direccion);
+            $stmt->bindParam(':ciudad', $ciudad);
+            $stmt->bindParam(':codPostal', $codPostal);
+            $stmt->bindParam(':pais', $pais);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return true;
+        }catch (PDOException $e){
+            echo "Error al editar el cliente: " . $e->getMessage();
             return false;
         }
     }
 
-    public function getClienteById($id){
+    public function delete($id){
+        try{
+            $stmt = $this->conn->prepare("delete from clientes where id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return true;
+        }catch (PDOException $e){
+            echo "Error al editar el producto: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    public function getClienteByEmail($email){
         $cliente = null;
         try {
-            $consulta = $this->conn->prepare("SELECT c.id as cliente_id, c.nombre, c.apellidoPaterno, c.apellidoMaterno, c.fechaNacimiento, c.sexo, c.departamento, c.provincia, c.distrito, c.direccion, u.id as usuario_id, u.email, u.password, u.rol  FROM clientes c INNER JOIN usuarios u ON u.id = c.usuario_id where c.id = :id");
-            $consulta->bindParam(':id', $id);
+            $consulta = $this->conn->prepare("SELECT c.*, u.email from clientes c inner join usuarios u on u.id = c.usuario_id  where u.email = :email");
+            $consulta->bindParam(':email', $email);
             $consulta->execute();
             $cliente = $consulta->fetch(PDO::FETCH_ASSOC);
             return $cliente;

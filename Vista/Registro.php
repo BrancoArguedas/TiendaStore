@@ -16,16 +16,13 @@
         <h2 class="text-3xl font-medium">Registrarse</h2>
         <form action="../Controlador/RegistroController.php" method="post" class="grid grid-cols-3 gap-8">
             <input class="bg-slate-300 px-4 py-2 rounded-xl" type="text" name="nombre" placeholder="Nombre" required>
-            <input class="bg-slate-300 px-4 py-2 rounded-xl" type="text" name="apellidoPaterno" placeholder="Apellido Paterno" required>
-            <input class="bg-slate-300 px-4 py-2 rounded-xl" type="text" name="apellidoMaterno" placeholder="Apellido Materno" required>
+            <input class="bg-slate-300 px-4 py-2 rounded-xl" type="text" name="userName" placeholder="Username" required>
             <input class="bg-slate-300 px-4 py-2 rounded-xl" type="email" name="email" placeholder="Correo electrónico" required>
             <input class="bg-slate-300 px-4 py-2 rounded-xl" type="password" name="password" placeholder="Contraseña" required>
             <input class="bg-slate-300 px-4 py-2 rounded-xl" type="password" name="repitePassword" placeholder="Repita su contraseña" required>
-            <input class="bg-slate-300 px-4 py-2 rounded-xl" type="date" name="fechaNacimiento" required>
-            <input class="bg-slate-300 px-4 py-2 rounded-xl" type="text" name="sexo" placeholder="Sexo" required>
-            <input class="bg-slate-300 px-4 py-2 rounded-xl" type="text" name="departamento" placeholder="Departamento" required>
-            <input class="bg-slate-300 px-4 py-2 rounded-xl" type="text" name="provincia" placeholder="Provincia" required>
-            <input class="bg-slate-300 px-4 py-2 rounded-xl" type="text" name="distrito" placeholder="Distrito" required>
+            <input class="bg-slate-300 px-4 py-2 rounded-xl" type="text" name="ciudad" placeholder="Ciudad" required>
+            <input class="bg-slate-300 px-4 py-2 rounded-xl" type="text" name="pais" placeholder="País" required>
+            <input class="bg-slate-300 px-4 py-2 rounded-xl" type="text" name="codPostal" placeholder="Codigo postal" required>
             <input class="bg-slate-300 px-4 py-2 rounded-xl" type="text" name="direccion" placeholder="Dirección" required>
             <?php
             if (isset($_GET['error']) && $_GET['error'] == 1) {

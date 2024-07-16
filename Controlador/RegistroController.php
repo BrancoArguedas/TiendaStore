@@ -8,24 +8,24 @@ if($_POST){
     $password = $_POST['password'];
     $rol = "cliente";
     $nombre = $_POST['nombre'];
-    $apellidoPaterno = $_POST['apellidoPaterno'];
-    $apellidoMaterno = $_POST['apellidoMaterno'];
-    $fechaNacimiento = $_POST['fechaNacimiento'];
-    $sexo = $_POST['sexo'];
-    $departamento = $_POST['departamento'];
-    $provincia = $_POST['provincia'];
-    $distrito = $_POST['distrito'];
+    $apodo = $_POST['userName'];
     $direccion = $_POST['direccion'];
+    $ciudad = $_POST['ciudad'];
+    $codPostal = $_POST['codPostal'];
+    $pais = $_POST['pais'];
+    $creado = date('d-m-Y H:i:s');
 
     /* Crear y obtener usuario */
     $usuarioModel = new Usuario();
-    $usuario = $usuarioModel->create($email, $password, $rol);
+    $usuario = $usuarioModel->create($email, $password, $rol, $creado);
+    var_dump($usuario);
     $user = $usuarioModel->findUserByEmail($email);
+    var_dump($user);
     $user_id = $user['id'];
 
     /* Crear cliente */
     $clienteModel = new Cliente();
-    $cliente = $clienteModel->create($user_id, $nombre, $apellidoPaterno, $apellidoMaterno, $fechaNacimiento, $sexo, $departamento, $provincia, $distrito, $direccion);
+    $cliente = $clienteModel->create($user_id, $nombre, $apodo, $direccion, $ciudad, $codPostal, $pais);
 
     if($usuario && $cliente){
         header("Location: ../Vista/Index.php");

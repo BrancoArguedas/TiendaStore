@@ -1,10 +1,11 @@
 <?php
+
 session_start();
 
 require_once '../Modelo/UsuarioModelo.php';
 require_once '../Modelo/ClienteModelo.php';
 
-if (isset($_POST["email"]) && isset($_POST["password"])) {
+if ( isset($_POST["email"]) && isset($_POST["password"])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
@@ -13,19 +14,19 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
     $usuario = $usuarioModel->validarDatos($email, $password);
 
     if ($usuario) {
-        $user = $usuarioModel->findUserByEmail($email);
 
         $clienteModel = new Cliente();
         $cliente = $clienteModel->getClienteByEmail($email);
-        $_SESSION['cliente_id'] = $cliente['cliente_id'];
-        $_SESSION['usuario_id'] = $user['id'];
-        $_SESSION['email'] = $user['email'];
-        $_SESSION['rol'] = $user['rol'];
+        $_SESSION['cliente_id'] = $cliente['id'];
+        $_SESSION['apodo'] = $cliente['apodo'];
+        $_SESSION['usuario_id'] = $usuario['id'];
+        $_SESSION['email'] = $usuario['email'];
+        $_SESSION['rol'] = $usuario['rol'];
         
-        if ($user['rol'] == "admin") {
+        if ($usuario['rol'] == "admin") {
             header("Location: ../Vista/Dashboard.php");
             exit(); 
-        } elseif ($user['rol'] == "cliente") {
+        } elseif ($usuario['rol'] == "cliente") {
             header("Location: ../Vista/Index.php");
             exit();
         } else {

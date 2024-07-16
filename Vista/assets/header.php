@@ -1,3 +1,4 @@
+
 <header class="bg-red-400 flex items-center justify-between min-h-16 px-4 fixed w-full top-0 lg:px-16">
 
     <a href="./Index.php" class="flex gap-2 items-center">
@@ -17,15 +18,24 @@
         <li class="py-2 text-center">
             <a href="Nosotros.php">Nosotros</a>
         </li>
-        <?php if ($_SESSION) : ?>
+        <?php if ( isset($_SESSION['rol'])) : ?>
             
             <li class="py-2 text-center">
-                <a href="<?php echo ($_SESSION['rol'] == "admin") ? 'Dashboard.php' : 'miPerfil.php'; ?>">Perfil</a>
+                <?php if($_SESSION['rol'] == "admin"): ?>
+                    <a href="Dashboard.php">Perfil</a>
+                <?php elseif ($_SESSION['rol'] == "cliente"): ?>
+                    <a href="miPerfil.php">Perfil</a>
+                <?php endif;?>
             </li>
 
             <li class="py-2 text-center">
                 <a href="./assets/cerrarSesion.php">Cerrar sesión</a>
             </li>
+            <?php if ($_SESSION['rol'] == "cliente"): ?>
+            <li class="py-2 text-center">
+                <a href="#" class="text-2xl"><ion-icon name="cart-outline"></ion-icon></a>
+            </li>
+            <?php endif; ?>
         <?php else:  ?>
             <li class="py-2 text-center">
                 <a href="Login.php">Iniciar sesión</a>

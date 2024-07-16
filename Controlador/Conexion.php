@@ -2,7 +2,7 @@
 
 class Conexion {
     private $host = 'localhost';
-    private $db_name = 'tiendastore';
+    private $db_name = 'tiendastore2';
     private $username = 'root';
     private $password = '';
     public $conn;
