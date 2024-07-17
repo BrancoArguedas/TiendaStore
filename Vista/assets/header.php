@@ -2,7 +2,7 @@
 
 require_once '../Controlador/ClienteController.php';
 $clienteController = new ClienteController();
-if ( isset($_SESSION['email']) ){
+if (isset($_SESSION['email'])) {
     $cliente = $clienteController->obtenerClienteByEmail($_SESSION['email']);
 }
 
@@ -15,7 +15,7 @@ if ( isset($_SESSION['email']) ){
         <img src="./public/logo.jpeg" class="w-12" alt="Logo">
         <h2>Tienda</h2>
     </a>
-    
+
     <div id="iconoMenu" class="flex flex-col gap-1 md:hidden" onclick="mostrarNav()">
         <div class="h-1 w-8 rounded-xl bg-red-700"></div>
         <div class="h-1 w-8 rounded-xl bg-red-700"></div>
@@ -23,36 +23,37 @@ if ( isset($_SESSION['email']) ){
     </div>
     <ul id="nav" class="hidden flex-col absolute top-16 w-full left-0 bg-red-400 md:flex md:flex-row md:top-auto md:left-auto md:static md:justify-self-end md:w-auto md:gap-16 lg:gap-32">
         <li class="py-2 text-center">
-            <?php if ( isset($cliente) ): ?>
-            <p class="border-solid border-2 border-black rounded-xl px-2" ><?= $cliente['nombre']; ?></p>
+            <?php if ($cliente && isset($cliente['nombre'])) : ?>
+                <p class="border-solid border-2 border-black rounded-xl px-2"><?= htmlspecialchars($cliente['nombre'], ENT_QUOTES, 'UTF-8'); ?></p>
             <?php endif; ?>
+
         </li>
-    
+
         <li class="py-2 text-center">
             <a href="Index.php">Inicio</a>
         </li>
         <li class="py-2 text-center">
             <a href="Nosotros.php">Nosotros</a>
         </li>
-        <?php if ( isset($_SESSION['rol'])) : ?>
-            
+        <?php if (isset($_SESSION['rol'])) : ?>
+
             <li class="py-2 text-center">
-                <?php if($_SESSION['rol'] == "admin"): ?>
+                <?php if ($_SESSION['rol'] == "admin") : ?>
                     <a href="Dashboard.php">Perfil</a>
-                <?php elseif ($_SESSION['rol'] == "cliente"): ?>
+                <?php elseif ($_SESSION['rol'] == "cliente") : ?>
                     <a href="miPerfil.php">Perfil</a>
-                <?php endif;?>
+                <?php endif; ?>
             </li>
 
             <li class="py-2 text-center">
                 <a href="./assets/cerrarSesion.php">Cerrar sesión</a>
             </li>
-            <?php if ($_SESSION['rol'] == "cliente"): ?>
-            <li class="py-2 text-center">
-                <a href="carritoCompra.php" class="text-2xl"><ion-icon name="cart-outline"></ion-icon></a>
-            </li>
+            <?php if ($_SESSION['rol'] == "cliente") : ?>
+                <li class="py-2 text-center">
+                    <a href="carritoCompra.php" class="text-2xl"><ion-icon name="cart-outline"></ion-icon></a>
+                </li>
             <?php endif; ?>
-        <?php else:  ?>
+        <?php else :  ?>
             <li class="py-2 text-center">
                 <a href="Login.php">Iniciar sesión</a>
             </li>
