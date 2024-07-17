@@ -38,7 +38,7 @@ class ProductoControlador
             $categoria = $_POST['categoria'];
             $precio = $_POST['precio'];
             $stock = $_POST['stock'];
-            $creado = date("d-m-Y H:i:s");
+            $creado = date("Y-m-d H:i:s");
             if (empty($_FILES)) {
                 exit('$_FILES is empty - is file_uploads set to "Off" in php.ini?');
             }
