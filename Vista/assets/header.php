@@ -23,7 +23,7 @@ if (isset($_SESSION['email'])) {
     </div>
     <ul id="nav" class="hidden flex-col absolute top-16 w-full left-0 bg-red-400 md:flex md:flex-row md:top-auto md:left-auto md:static md:justify-self-end md:w-auto md:gap-16 lg:gap-32">
         <li class="py-2 text-center">
-            <?php if ($cliente && isset($cliente['nombre'])) : ?>
+            <?php if ( isset($cliente) && isset($cliente['nombre'])) : ?>
                 <p class="border-solid border-2 border-black rounded-xl px-2"><?= htmlspecialchars($cliente['nombre'], ENT_QUOTES, 'UTF-8'); ?></p>
             <?php endif; ?>
 
