@@ -23,6 +23,7 @@ session_start();
                 <th>Precio Unitario</th>
                 <th>Cantidad</th>
                 <th>Subtotal</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -33,6 +34,12 @@ session_start();
                         <td><?= $producto['precioUnit']; ?></td>
                         <td><?= $producto['cantidad']; ?></td>
                         <td><?= $producto['subTotal']; ?></td>
+                        <td>
+                            <a href="eliminar_producto.php?indice=<?= $indice; ?>">
+                                <ion-icon class="text-red-800" name="trash-outline"></ion-icon>
+                            </a>
+                        </td>
+
                     </tr>
                 <?php endforeach; ?>
             <?php else : ?>
@@ -40,7 +47,7 @@ session_start();
                     <td colspan="4">No hay productos en el carrito</td>
                 </tr>
             <?php endif; ?>
-            
+
         </tbody>
     </table>
     <?php if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) : ?>
@@ -52,4 +59,5 @@ session_start();
 </body>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
 </html>
