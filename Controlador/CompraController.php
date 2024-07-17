@@ -27,9 +27,10 @@ if (isset($_SESSION['email'])) {
         }
         $pagoTotal = $detalleCompraModel->getPagoTotal($compra);
         $compraModel->currentPagoTotal($pagoTotal, $compra);
-        
+        unset($_SESSION['carrito']);
     }
     header("Location: ../vista/compraExitosa.php");
 }else{
     header("Location: ../Vista/Login.php");
 }
+

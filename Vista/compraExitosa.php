@@ -3,6 +3,7 @@
 require_once '../Controlador/ClienteController.php';
 require_once '../Controlador/ProductoController.php';
 
+
 session_start();
 
 if (isset($_SESSION['email'])) {
@@ -46,10 +47,7 @@ if (isset($_SESSION['email'])) {
                                 <td><?= $producto['subTotal']; ?></td>
                             </tr>
                         <?php endforeach; ?>
-                    <?php else : ?>
-                        <tr>
-                            <td colspan="4">No hay productos en el carrito</td>
-                        </tr>
+                    
                     <?php endif; ?>
 
                 </tbody>
