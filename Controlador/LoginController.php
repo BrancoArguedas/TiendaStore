@@ -22,6 +22,7 @@ if ( isset($_POST["email"]) && isset($_POST["password"])) {
         $_SESSION['usuario_id'] = $usuario['id'];
         $_SESSION['email'] = $usuario['email'];
         $_SESSION['rol'] = $usuario['rol'];
+        $_SESSION['carrito'] = [];
         
         if ($usuario['rol'] == "admin") {
             header("Location: ../Vista/Dashboard.php");

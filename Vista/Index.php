@@ -10,6 +10,8 @@ $productos = $productoControlador->leerProductos();
 <!DOCTYPE html>
 <html lang="en">
 
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,6 +33,7 @@ $productos = $productoControlador->leerProductos();
     ?>
 
     <section class="mt-16">
+
         <p class="w-full text-center py-4 text-3xl font-medium">Productos</p>
         <div class="flex flex-wrap gap-8 px-4 justify-center pb-4">
             <?php if (empty($productos)) : ?>
@@ -42,10 +45,10 @@ $productos = $productoControlador->leerProductos();
                         <h2 class="font-bold"><?= $producto['nombre']; ?></h2>
                         <p class="self-start"><?= $producto['categoria']; ?></p>
                         <p><?= $producto['precioUnit']; ?></p>
-                        <form action="../Controlador/DetalleCompraControlador.php" class="grid grid-cols-3">
+                        <form action="../Controlador/DetalleCompraControlador.php" class="grid grid-cols-3" method="post">
                             <input type="hidden" name="productoId" value="<?= $producto['id']; ?>">
                             <p class="px-2 py-1 cursor-pointer bg-slate-400 rounded-sm text-center" onclick="disminuirInput(<?= $producto['id']; ?>)">-</p>
-                            <input class="w-10 text-center" type="number" id="cantidad-<?= $producto['id']; ?>" value="0" readonly>
+                            <input class="w-10 text-center" name="cantidad_<?= $producto['id']; ?>" type="number" id="cantidad-<?= $producto['id']; ?>" value="0" readonly>
                             <p class="px-2 py-1 cursor-pointer bg-slate-400 rounded-sm text-center" onclick="aumentarInput(<?= $producto['id']; ?>)">+</p>
                             <button class="col-span-3 my-2 bg-zinc-700 text-white rounded-sm">Añadir al carrito</button>
                         </form>

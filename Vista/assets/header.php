@@ -33,7 +33,7 @@
             </li>
             <?php if ($_SESSION['rol'] == "cliente"): ?>
             <li class="py-2 text-center">
-                <a href="#" class="text-2xl"><ion-icon name="cart-outline"></ion-icon></a>
+                <a href="carritoCompra.php" class="text-2xl"><ion-icon name="cart-outline"></ion-icon></a>
             </li>
             <?php endif; ?>
         <?php else:  ?>

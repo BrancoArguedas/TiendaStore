@@ -68,6 +68,10 @@ class ClienteController
         $productos = $this->clienteModel->read();
         return $productos;
     }
+
+    public function obtenerClienteByEmail($email){
+        return $this->clienteModel->getClienteByEmail($email);
+    }
 }
 
 $controller = new ClienteController();

@@ -83,6 +83,18 @@ class Producto{
         }
     }
 
+    public function getProductById($id) {
+        try {
+            $stmt = $this->conn->prepare("SELECT * FROM productos WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error de la consulta: " . $e->getMessage();
+            return null;
+        }
+    }
+
     public function updateStock($id, $cantidad) {
         $query = "UPDATE productos SET stock = stock - :cantidad WHERE id = :id";
         $stmt = $this->conn->prepare($query);

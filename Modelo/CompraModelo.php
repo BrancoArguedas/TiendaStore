@@ -11,18 +11,26 @@ class Compra{
     }
 
     public function create($cliente_id, $precioTotal, $fechaCompra){
-        try{
-            $stmt = $this->conn->prepare("Insert into compras (cliente_id, precioTotal, fechaCompra) values (:cliente_id, :precioTotal, :fechaCompra)");
-
+        try {
+            $stmt = $this->conn->prepare("INSERT INTO compras (cliente_id, precioTotal, fechaCompra) VALUES (:cliente_id, :precioTotal, :fechaCompra)");
+    
             $stmt->bindParam(':cliente_id', $cliente_id);
             $stmt->bindParam(':precioTotal', $precioTotal);
             $stmt->bindParam(':fechaCompra', $fechaCompra);
-            return $stmt->execute();
-        }catch (PDOException $e){
+            
+            $stmt->execute();
+    
+            if ($stmt->rowCount() > 0) {
+                return $this->conn->lastInsertId();
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
             echo "Error de la consulta: " . $e->getMessage();
             return false;
         }
     }
+    
 
     public function read(){
         $compras = [];
@@ -51,7 +59,7 @@ class Compra{
 
     public function currentPagoTotal($pagoTotal, $compra_id){
         try{
-            $stmt = $this->conn->prepare("update compras set precioTotal = :pagoTotal where compra_id = :compra_id");
+            $stmt = $this->conn->prepare("update compras set precioTotal = :pagoTotal where id = :compra_id");
             $stmt->bindParam(':pagoTotal', $pagoTotal);
             $stmt->bindParam(':compra_id', $compra_id);
             $stmt->execute();

@@ -148,6 +148,10 @@ class ProductoControlador
         $productos = $this->productoModel->read();
         return $productos;
     }
+
+    public function obtenerProductoById($id){
+        return $this->productoModel->getProductById($id);
+    }
 }
 
 $controller = new ProductoControlador();
