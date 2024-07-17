@@ -22,8 +22,10 @@ if ( isset($_SESSION['email']) ){
         <div class="h-1 w-8 rounded-xl bg-red-700"></div>
     </div>
     <ul id="nav" class="hidden flex-col absolute top-16 w-full left-0 bg-red-400 md:flex md:flex-row md:top-auto md:left-auto md:static md:justify-self-end md:w-auto md:gap-16 lg:gap-32">
-    <li class="py-2 text-center">
+        <li class="py-2 text-center">
+            <?php if ( isset($cliente) ): ?>
             <p class="border-solid border-2 border-black rounded-xl px-2" ><?= $cliente['nombre']; ?></p>
+            <?php endif; ?>
         </li>
     
         <li class="py-2 text-center">

@@ -41,8 +41,7 @@ if (isset($_SESSION['email'])) {
                     <?php if (isset($_SESSION['carrito'])) : ?>
                         <?php foreach ($_SESSION['carrito'] as $indice => $producto) : ?>
                             <tr>
-                                <?php $product = $productoController->obtenerProductoById($producto['producto_id']) ?>
-                                <td><?= $product['nombre']; ?></td>
+                                <td><?= $producto['producto_id']; ?></td>
                                 <td><?= $producto['precioUnit']; ?></td>
                                 <td><?= $producto['cantidad']; ?></td>
                                 <td><?= $producto['subTotal']; ?></td>
